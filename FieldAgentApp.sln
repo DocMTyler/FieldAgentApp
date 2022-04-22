@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FieldAgent.Core", "FieldAge
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FieldAgent.DAL", "FieldAgent.DAL\FieldAgent.DAL.csproj", "{28BE89C3-5165-47C6-8513-81C789E21A84}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FieldAgent.DAL.Tests", "FieldAgent.DAL.Tests\FieldAgent.DAL.Tests.csproj", "{39F2B694-B32A-43A6-A197-1095FCF64491}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{28BE89C3-5165-47C6-8513-81C789E21A84}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{28BE89C3-5165-47C6-8513-81C789E21A84}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{28BE89C3-5165-47C6-8513-81C789E21A84}.Release|Any CPU.Build.0 = Release|Any CPU
+		{39F2B694-B32A-43A6-A197-1095FCF64491}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39F2B694-B32A-43A6-A197-1095FCF64491}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39F2B694-B32A-43A6-A197-1095FCF64491}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39F2B694-B32A-43A6-A197-1095FCF64491}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

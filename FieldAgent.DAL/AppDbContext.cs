@@ -7,14 +7,13 @@ namespace FieldAgent.DAL
 {
     public class AppDbContext : DbContext
     {
-        public DbSet<Agency> Agencies { get; set; }
-        public DbSet<AgencyAgent> AgencyAgents { get; set; }
-        public DbSet<Agent> Agents { get; set; }
-        public DbSet<Alias> Aliases { get; set; }
-        public DbSet<Location> Locations { get; set; }
-        public DbSet<Mission> Missions { get; set; }
-        public DbSet<MissionAgent> MissionAgents { get; set; }
-        public DbSet<SecurityClearance> SecurityClearances { get; set; }
+        public DbSet<Agency> Agency { get; set; }
+        public DbSet<AgencyAgent> AgencyAgent { get; set; }
+        public DbSet<Agent> Agent { get; set; }
+        public DbSet<Alias> Alias { get; set; }
+        public DbSet<Location> Location { get; set; }
+        public DbSet<Mission> Mission { get; set; }
+        public DbSet<SecurityClearance> SecurityClearance { get; set; }
 
         public AppDbContext() : base()
         {
@@ -24,6 +23,12 @@ namespace FieldAgent.DAL
         public AppDbContext(DbContextOptions options) : base(options)
         {
 
+        }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder.Entity<AgencyAgent>()
+                .HasKey(a => new { a.AgencyID, a.AgentID });
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

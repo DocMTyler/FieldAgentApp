@@ -4,7 +4,7 @@ namespace FieldAgent.Core.Entities
 {
     public class AgencyAgent
     {
-        public int BadgeID { get; set; }
+        public Guid BadgeID { get; set; }
         public DateTime ActivationDate { get; set; }
         public DateTime DeactivationDate { get; set; }
         public bool IsActive { get; set; }
@@ -17,6 +17,5 @@ namespace FieldAgent.Core.Entities
 
         public int SecurityClearanceID { get; set; }
         public SecurityClearance SecurityClearance { get; set; }
-
     }
 }

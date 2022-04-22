@@ -11,8 +11,8 @@ namespace FieldAgent.Core.Entities
         public DateTime DateOfBirth { get; set; }
         public decimal Height { get; set; }
 
-        List<AgencyAgent> AgencyAgents { get; set; }
-        List<MissionAgent> MissionAgents { get; set; }
-        List<Alias> Aliases { get; set; }
+        public List<AgencyAgent> AgencyAgents { get; set; }
+        public List<Mission> Missions { get; set; }
+        public List<Alias> Aliases { get; set; }
     }
 }
