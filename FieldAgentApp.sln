@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.1.32414.318
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31402.337
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FieldAgent.Core", "FieldAgent.Core\FieldAgent.Core.csproj", "{091DD5C3-2426-447E-8F41-A970BD30F6CA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FieldAgent.Core", "FieldAgent.Core\FieldAgent.Core.csproj", "{091DD5C3-2426-447E-8F41-A970BD30F6CA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FieldAgent.DAL", "FieldAgent.DAL\FieldAgent.DAL.csproj", "{28BE89C3-5165-47C6-8513-81C789E21A84}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{091DD5C3-2426-447E-8F41-A970BD30F6CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{091DD5C3-2426-447E-8F41-A970BD30F6CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{091DD5C3-2426-447E-8F41-A970BD30F6CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{28BE89C3-5165-47C6-8513-81C789E21A84}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28BE89C3-5165-47C6-8513-81C789E21A84}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28BE89C3-5165-47C6-8513-81C789E21A84}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28BE89C3-5165-47C6-8513-81C789E21A84}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
