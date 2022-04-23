@@ -13,14 +13,14 @@ namespace FieldAgent.DAL.Tests
         Alias ffa = new Alias()
         {
             AgentID = 2,
-            AliasName = "Wall",
+            AliasName = "Tamiko",
             InterpolID = Guid.Parse("8ad8a649-e501-4f47-9f86-9cbb46c3044d"),
             Persona = "Vestibulum sed magna at nunc commodo place. Praesent blandit. Nam nulla. Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede."
         };
 
         Alias ffaUpdate = new Alias()
         {
-            AliasID = 1,
+            AliasID = 2,
             AgentID = 2,
             AliasName = "Jimbo",
             InterpolID = Guid.Parse("8ad8a649-e501-4f47-9f86-9cbb46c3044d"),
@@ -38,7 +38,7 @@ namespace FieldAgent.DAL.Tests
         [Test]
         public void TestGetGets()
         {
-            Assert.AreEqual(ffa.AliasName, db.Get(1).Data.AliasName);
+            Assert.AreEqual(ffa.AliasName, db.Get(2).Data.AliasName);
         }
 
         [Test]
@@ -56,7 +56,7 @@ namespace FieldAgent.DAL.Tests
         [Test]
         public void DeleteDeletes()
         {
-            Assert.IsTrue(db.Delete(ffaUpdate.AliasID).Success);
+            Assert.IsTrue(db.Delete(3).Success);
         }
 
         [Test]
