@@ -58,5 +58,11 @@ namespace FieldAgent.DAL.Tests
         {
             Assert.IsTrue(db.Delete(ffaUpdate.AliasID).Success);
         }
+
+        [Test]
+        public void GetByAgentGetsByAgent()
+        {
+            Assert.IsTrue(db.GetByAgent(1).Success);
+        }
     }
 }

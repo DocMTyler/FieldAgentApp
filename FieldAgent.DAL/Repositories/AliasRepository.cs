@@ -60,7 +60,22 @@ namespace FieldAgent.DAL.Repositories
 
         public Response<List<Alias>> GetByAgent(int agentId)
         {
-            throw new NotImplementedException();
+            Response<List<Alias>> response = new Response<List<Alias>>();
+            using(var db = DbFac.GetDbContext())
+            {
+                response.Data = db.Alias.Where(a => a.AgentID == agentId).ToList();
+                if (response.Data != null)
+                {
+                    response.Message = "Got";
+                    response.Success = true;
+                }
+                else
+                {
+                    response.Message = "Not Got";
+                    response.Success = false;
+                }
+            }
+            return response;
         }
 
         public Response<Alias> Insert(Alias alias)
