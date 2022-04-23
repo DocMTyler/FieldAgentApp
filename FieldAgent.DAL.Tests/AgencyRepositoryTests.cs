@@ -34,7 +34,6 @@ namespace FieldAgent.DAL.Tests
             ConfigProvider provider = new ConfigProvider();
             dbf = new DBFactory(provider.Config, FactoryMode.TEST);
             db = new AgencyRepository(dbf);
-
         }
 
         [Test]
