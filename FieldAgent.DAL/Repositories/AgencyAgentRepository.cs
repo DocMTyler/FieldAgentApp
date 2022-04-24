@@ -62,12 +62,42 @@ namespace FieldAgent.DAL
 
         public Response<List<AgencyAgent>> GetByAgency(int agencyId)
         {
-            throw new NotImplementedException();
+            Response<List<AgencyAgent>> response = new Response<List<AgencyAgent>>();
+            using(var db = DbFac.GetDbContext())
+            {
+                response.Data = db.AgencyAgent.Where(a => a.AgencyID == agencyId).ToList();
+                if(response.Data != null)
+                {
+                    response.Message = "Got";
+                    response.Success = true;
+                }
+                else
+                {
+                    response.Message = "Not got";
+                    response.Success = false;
+                }
+            }
+            return response;
         }
 
         public Response<List<AgencyAgent>> GetByAgent(int agentId)
         {
-            throw new NotImplementedException();
+            Response<List<AgencyAgent>> response = new Response<List<AgencyAgent>>();
+            using(var db = DbFac.GetDbContext())
+            {
+                response.Data = db.AgencyAgent.Where(a => a.AgentID == agentId).ToList();
+                if(response.Data != null)
+                {
+                    response.Message = "Got";
+                    response.Success = true;
+                }
+                else
+                {
+                    response.Message = "Not got";
+                    response.Success = false;
+                }
+            }
+            return response;
         }
 
         public Response<AgencyAgent> Insert(AgencyAgent agencyAgent)

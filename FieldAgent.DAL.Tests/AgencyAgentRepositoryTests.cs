@@ -63,6 +63,18 @@ namespace FieldAgent.DAL.Tests
         {
             Assert.IsTrue(db.Delete(fFAAUpdate.AgencyID, fFAAUpdate.AgentID).Success);
         }
+
+        [Test]
+        public void GetByAgencyGetsByAgency()
+        {
+            Assert.IsTrue(db.GetByAgency(9).Success);
+        }
+
+        [Test]
+        public void GetByAgentGetsByAgent()
+        {
+            Assert.IsTrue(db.GetByAgent(5).Success);
+        }
     }
 }
 
