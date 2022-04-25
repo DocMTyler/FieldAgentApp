@@ -25,10 +25,16 @@ namespace FieldAgent.DAL.Repositories
                     .Single(aa => aa.MissionID == missionId);
                 if (mission != null)
                 {
-                    db.Mission.Remove(mission);
-                    db.SaveChanges();
-                    response.Message = "Got";
-                    response.Success = true;
+                    try
+                    {
+                        db.Mission.Remove(mission);
+                        db.SaveChanges();
+                        response.Message = "Got";
+                        response.Success = true;
+                    }catch(Exception e)
+                    {
+                        Console.WriteLine(e.Message);
+                    }
                 }
                 else
                 {
@@ -138,16 +144,20 @@ namespace FieldAgent.DAL.Repositories
                 var foundMission = db.Mission.Single(aa => aa.MissionID == mission.MissionID);
                 if (foundMission != null)
                 {
-                    foundMission.CodeName = mission.CodeName;
-                    foundMission.StartDate = mission.StartDate;
-                    foundMission.ProjectedEndDate = mission.ProjectedEndDate;
-                    foundMission.ActualEndDate = mission.ActualEndDate;
-                    foundMission.OperationalCost = mission.OperationalCost;
-                    foundMission.Notes = mission.Notes;
-                    db.Mission.Update(foundMission);
-                    db.SaveChanges();
-                    response.Message = "Updated";
-                    response.Success = true;
+                    try
+                    {
+                        foundMission.CodeName = mission.CodeName;
+                        foundMission.StartDate = mission.StartDate;
+                        foundMission.ProjectedEndDate = mission.ProjectedEndDate;
+                        foundMission.ActualEndDate = mission.ActualEndDate;
+                        foundMission.OperationalCost = mission.OperationalCost;
+                        foundMission.Notes = mission.Notes;
+                        db.Mission.Update(foundMission);
+                        db.SaveChanges();
+                        response.Message = "Updated";
+                        response.Success = true;
+                    }
+                    catch (Exception e) { Console.WriteLine(e.Message); }
                 }
                 else
                 {

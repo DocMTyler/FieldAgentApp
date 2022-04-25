@@ -25,10 +25,14 @@ namespace FieldAgent.DAL.Repositories
                     .Single(l => l.LocationID == locationId);
                 if(location != null)
                 {
-                    db.Location.Remove(location);
-                    db.SaveChanges();
-                    response.Message = "Deleted";
-                    response.Success = true;
+                    try
+                    {
+                        db.Location.Remove(location);
+                        db.SaveChanges();
+                        response.Message = "Deleted";
+                        response.Success = true;
+                    }
+                    catch (Exception e) { Console.WriteLine(e.Message); } 
                 }
                 else
                 {
@@ -87,11 +91,15 @@ namespace FieldAgent.DAL.Repositories
             {
                 if(location != null)
                 {
-                    db.Location.Add(location);
-                    db.SaveChanges();
-                    response.Data = location;
-                    response.Message = "Added";
-                    response.Success = true;
+                    try
+                    {
+                        db.Location.Add(location);
+                        db.SaveChanges();
+                        response.Data = location;
+                        response.Message = "Added";
+                        response.Success = true;
+                    }
+                    catch (Exception e) { Console.WriteLine(e.Message); } 
                 }
                 else
                 {
@@ -110,16 +118,20 @@ namespace FieldAgent.DAL.Repositories
                 var foundLocation = db.Location.Single(l => l.LocationID == location.LocationID);
                 if(foundLocation != null)
                 {
-                    foundLocation.LocationName = location.LocationName;
-                    foundLocation.Street1 = location.Street1;
-                    foundLocation.Street2 = location.Street2;
-                    foundLocation.City = location.City;
-                    foundLocation.PostalCode = location.PostalCode;
-                    foundLocation.CountryCode = location.CountryCode;
-                    db.Location.Update(foundLocation);
-                    db.SaveChanges();
-                    response.Message = "Updated";
-                    response.Success = true;
+                    try
+                    {
+                        foundLocation.LocationName = location.LocationName;
+                        foundLocation.Street1 = location.Street1;
+                        foundLocation.Street2 = location.Street2;
+                        foundLocation.City = location.City;
+                        foundLocation.PostalCode = location.PostalCode;
+                        foundLocation.CountryCode = location.CountryCode;
+                        db.Location.Update(foundLocation);
+                        db.SaveChanges();
+                        response.Message = "Updated";
+                        response.Success = true;
+                    }
+                    catch (Exception e) { Console.WriteLine(e.Message); } 
                 }
                 else
                 {

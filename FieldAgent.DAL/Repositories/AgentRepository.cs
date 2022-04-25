@@ -25,10 +25,14 @@ namespace FieldAgent.DAL.Repositories
                 var agent = db.Agent.Single(a => a.AgentID == agentId);
                 if (agent != null)
                 {
-                    db.Agent.Remove(agent);
-                    db.SaveChanges();
-                    response.Message = "Deleted";
-                    response.Success = true;
+                    try
+                    {
+                        db.Agent.Remove(agent);
+                        db.SaveChanges();
+                        response.Message = "Deleted";
+                        response.Success = true;
+                    }
+                    catch (Exception e) { Console.WriteLine(e.Message); } 
                 }
                 else
                 {
@@ -76,11 +80,15 @@ namespace FieldAgent.DAL.Repositories
             {
                 if (agent != null)
                 {
-                    db.Agent.Add(agent);
-                    db.SaveChanges();
-                    response.Data = agent;
-                    response.Message = "Added";
-                    response.Success = true;
+                    try
+                    {
+                        db.Agent.Add(agent);
+                        db.SaveChanges();
+                        response.Data = agent;
+                        response.Message = "Added";
+                        response.Success = true;
+                    }
+                    catch (Exception e) { Console.WriteLine(e.Message); } 
                 }
                 else
                 {
@@ -99,14 +107,18 @@ namespace FieldAgent.DAL.Repositories
                 var foundAgent = db.Agent.Find(agent.AgentID);
                 if (foundAgent != null)
                 {
-                    foundAgent.FirstName = agent.FirstName;
-                    foundAgent.LastName = agent.LastName;
-                    foundAgent.DateOfBirth = agent.DateOfBirth;
-                    foundAgent.Height = agent.Height;
-                    db.Agent.Update(foundAgent);
-                    db.SaveChanges();
-                    response.Message = "Updated";
-                    response.Success = true;
+                    try
+                    {
+                        foundAgent.FirstName = agent.FirstName;
+                        foundAgent.LastName = agent.LastName;
+                        foundAgent.DateOfBirth = agent.DateOfBirth;
+                        foundAgent.Height = agent.Height;
+                        db.Agent.Update(foundAgent);
+                        db.SaveChanges();
+                        response.Message = "Updated";
+                        response.Success = true;
+                    }
+                    catch (Exception e) { Console.WriteLine(e.Message); } 
                 }
                 else
                 {

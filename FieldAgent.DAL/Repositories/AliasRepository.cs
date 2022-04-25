@@ -24,10 +24,14 @@ namespace FieldAgent.DAL.Repositories
                 var alias = db.Alias.Single(a => a.AliasID == aliasId);
                 if (alias != null)
                 {
-                    db.Alias.Remove(alias);
-                    db.SaveChanges();
-                    response.Message = "Deleted";
-                    response.Success = true;
+                    try
+                    {
+                        db.Alias.Remove(alias);
+                        db.SaveChanges();
+                        response.Message = "Deleted";
+                        response.Success = true;
+                    }
+                    catch (Exception e) { Console.WriteLine(e.Message); } 
                 }
                 else
                 {
@@ -115,12 +119,16 @@ namespace FieldAgent.DAL.Repositories
                 var foundAlias = db.Alias.Find(alias.AliasID);
                 if (foundAlias != null)
                 {
-                    foundAlias.AliasName = alias.AliasName;
-                    foundAlias.Persona = alias.Persona;
-                    db.Alias.Update(foundAlias);
-                    db.SaveChanges();
-                    response.Message = "Updated";
-                    response.Success = true;
+                    try
+                    {
+                        foundAlias.AliasName = alias.AliasName;
+                        foundAlias.Persona = alias.Persona;
+                        db.Alias.Update(foundAlias);
+                        db.SaveChanges();
+                        response.Message = "Updated";
+                        response.Success = true;
+                    }
+                    catch (Exception e) { Console.WriteLine(e.Message); } 
                 }
                 else
                 {

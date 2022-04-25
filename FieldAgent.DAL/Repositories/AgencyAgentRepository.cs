@@ -25,10 +25,17 @@ namespace FieldAgent.DAL
                     .Single(aa => aa.AgencyID == agencyid && aa.AgentID == agentid);
                 if (agencyAgent != null)
                 {
-                    db.AgencyAgent.Remove(agencyAgent);
-                    db.SaveChanges();
-                    response.Message = "Got";
-                    response.Success = true;
+                    try
+                    {
+                        db.AgencyAgent.Remove(agencyAgent);
+                        db.SaveChanges();
+                        response.Message = "Got";
+                        response.Success = true;
+                    }catch(Exception e)
+                    {
+                        Console.WriteLine(e.Message);
+                    }
+                    
                 }
                 else
                 {
@@ -123,7 +130,7 @@ namespace FieldAgent.DAL
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine("e.Message");
+                    Console.WriteLine(e.Message);
                 }
 
             }
@@ -138,12 +145,18 @@ namespace FieldAgent.DAL
                 var foundAgencyAgent = db.AgencyAgent.Single(aa => aa.BadgeID == agencyAgent.BadgeID);
                 if (foundAgencyAgent != null)
                 {
-                    foundAgencyAgent.ActivationDate = agencyAgent.ActivationDate;
-                    foundAgencyAgent.DeactivationDate = agencyAgent.DeactivationDate;
-                    db.AgencyAgent.Update(foundAgencyAgent);
-                    db.SaveChanges();
-                    response.Message = "Updated";
-                    response.Success = true;
+                    try
+                    {
+                        foundAgencyAgent.ActivationDate = agencyAgent.ActivationDate;
+                        foundAgencyAgent.DeactivationDate = agencyAgent.DeactivationDate;
+                        db.AgencyAgent.Update(foundAgencyAgent);
+                        db.SaveChanges();
+                        response.Message = "Updated";
+                        response.Success = true;
+                    }catch(Exception e)
+                    {
+                        Console.WriteLine(e.Message);
+                    }
                 }
                 else
                 {

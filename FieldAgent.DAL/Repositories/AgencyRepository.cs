@@ -24,10 +24,14 @@ namespace FieldAgent.DAL.Repositories
                 var agency = db.Agency.Single(a => a.AgencyID == agencyId);
                 if(agency != null)
                 {
-                    db.Agency.Remove(agency);
-                    db.SaveChanges();
-                    response.Message = "Deleted";
-                    response.Success = true;
+                    try
+                    {
+                        db.Agency.Remove(agency);
+                        db.SaveChanges();
+                        response.Message = "Deleted";
+                        response.Success = true;
+                    }
+                    catch (Exception e) { Console.WriteLine(e.Message); }
                 }
                 else
                 {
@@ -85,11 +89,15 @@ namespace FieldAgent.DAL.Repositories
             {
                 if(agency != null)
                 {
-                    db.Agency.Add(agency);
-                    db.SaveChanges();
-                    response.Data = agency;
-                    response.Message = "Added";
-                    response.Success = true;
+                    try
+                    {
+                        db.Agency.Add(agency);
+                        db.SaveChanges();
+                        response.Data = agency;
+                        response.Message = "Added";
+                        response.Success = true;
+                    }
+                    catch (Exception e) { Console.WriteLine(e.Message); }
                 }
                 else
                 {
@@ -108,12 +116,18 @@ namespace FieldAgent.DAL.Repositories
                 var foundAgency = db.Agency.Find(agency.AgencyID);
                 if(foundAgency != null)
                 {
-                    foundAgency.ShortName = agency.ShortName;
-                    foundAgency.LongName = agency.LongName;
-                    db.Agency.Update(foundAgency);
-                    db.SaveChanges();
-                    response.Message = "Updated";
-                    response.Success = true;
+                    try
+                    {
+                        foundAgency.ShortName = agency.ShortName;
+                        foundAgency.LongName = agency.LongName;
+                        db.Agency.Update(foundAgency);
+                        db.SaveChanges();
+                        response.Message = "Updated";
+                        response.Success = true;
+                    }catch(Exception e)
+                    {
+                        Console.WriteLine(e.Message);
+                    }
                 }
                 else
                 {
