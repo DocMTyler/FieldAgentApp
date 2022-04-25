@@ -65,12 +65,29 @@ namespace FieldAgent.DAL.Repositories
 
         public Response<List<Mission>> GetMissions(int agentId)
         {
-            Response<List<Mission>> missions = new Response<List<Mission>>();
+            Response<List<Mission>> response = new Response<List<Mission>>();
             using(var db = DbFac.GetDbContext())
             {
-                   
+                var mission = db.Mission
+                     .Include(m => m.MissionAgent)
+                     .ToList();
+
+                if (mission != null)
+                {
+                    response.Data = mission
+                        .Where(m => m.MissionAgent
+                        .Any(ma => ma.AgentId == agentId))
+                        .ToList();
+                    response.Success = true;
+                    response.Message = "Got";
+                }
+                else
+                {
+                    response.Success = false;
+                    response.Message = "Not got";
+                }
             }
-            return missions;
+            return response;
         }
 
         public Response<Agent> Insert(Agent agent)

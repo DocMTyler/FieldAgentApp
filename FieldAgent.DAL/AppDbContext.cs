@@ -14,6 +14,7 @@ namespace FieldAgent.DAL
         public DbSet<Location> Location { get; set; }
         public DbSet<Mission> Mission { get; set; }
         public DbSet<SecurityClearance> SecurityClearance { get; set; }
+        public DbSet<MissionAgent> MissionAgent { get; set; }
 
         public AppDbContext() : base()
         {
@@ -29,6 +30,8 @@ namespace FieldAgent.DAL
         {
             builder.Entity<AgencyAgent>()
                 .HasKey(a => new { a.AgencyID, a.AgentID });
+            builder.Entity<MissionAgent>()
+                .HasKey(ma => new { ma.MissionId, ma.AgentId });
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

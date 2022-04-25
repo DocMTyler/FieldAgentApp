@@ -1,6 +1,7 @@
 ﻿using FieldAgent.Core;
 using FieldAgent.Core.Entities;
 using FieldAgent.Core.Interfaces.DAL;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -54,12 +55,12 @@ namespace FieldAgent.DAL.Repositories
                     .Single(l => l.MissionID == missionId);
                 if(response != null)
                 {
-                    response.Message = "Fuck ou===";
+                    response.Message = "Got";
                     response.Success = true;
                 }
                 else
                 {
-                    response.Message = "Fuck you";
+                    response.Message = "Not Got";
                     response.Success = false;
                 }
             }
@@ -89,20 +90,35 @@ namespace FieldAgent.DAL.Repositories
         public Response<List<Mission>> GetByAgent(int agentId)
         {
             Response<List<Mission>> response = new Response<List<Mission>>();
-            /*using (var db = DbFac.GetDbContext())
+            using (var db = DbFac.GetDbContext())
             {
-                response.Data = db.Mission.Where(a => a.AgentID == agentId).ToList();
-                if (response.Data != null)
+                try
                 {
-                    response.Message = "Got";
-                    response.Success = true;
+                    var mission = db.Mission
+                        .Include(m => m.MissionAgent)
+                        .ToList();
+
+                    if (mission != null)
+                    {
+                        response.Data = mission
+                            .Where(m => m.MissionAgent
+                            .Any(ma => ma.AgentId == agentId))
+                            .ToList();
+                        response.Success = true;
+                        response.Message = "Got";
+                    }
+                    else
+                    {
+                        response.Success = false;
+                        response.Message = "Not got";
+                    }
                 }
-                else
+                catch (Exception ex)
                 {
-                    response.Message = "Not got";
                     response.Success = false;
+                    response.Message = ex.Message;
                 }
-            }*/
+            }
             return response;
         }
 

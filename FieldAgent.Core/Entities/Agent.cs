@@ -16,7 +16,7 @@ namespace FieldAgent.Core.Entities
         //[Table(tableName)]
 
         public List<AgencyAgent> AgencyAgents { get; set; }
-        public List<Mission> Missions { get; set; }
+        public List<MissionAgent> MissionAgent { get; set; }
         public List<Alias> Aliases { get; set; }
     }
 }

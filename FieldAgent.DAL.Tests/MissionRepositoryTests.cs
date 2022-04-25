@@ -44,6 +44,12 @@ namespace FieldAgent.DAL.Tests
         }
 
         [Test]
+        public void GetByAgentGetsByAgent()
+        {
+            Assert.IsTrue(db.GetByAgent(1).Success);
+        }
+
+        [Test]
         public void InsertInserts()
         {
             Assert.IsTrue(db.Insert(thing).Success);

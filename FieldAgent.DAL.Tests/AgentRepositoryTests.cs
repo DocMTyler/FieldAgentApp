@@ -55,11 +55,11 @@ namespace FieldAgent.DAL.Tests
             Assert.AreEqual(ffa.LastName, db.Get(1).Data.LastName);
         }
 
-        /*[Test]
+        [Test]
         public void GetMissionsGetsMissions()
         {
-            throw new NotImplementedException();
-        }*/
+            Assert.IsTrue(db.GetMissions(1).Success);
+        }
 
         [Test]
         public void InsertInserts()
