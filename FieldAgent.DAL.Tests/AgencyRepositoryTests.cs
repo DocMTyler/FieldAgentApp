@@ -1,5 +1,6 @@
 using FieldAgent.Core.Entities;
 using FieldAgent.DAL.Repositories;
+using Microsoft.EntityFrameworkCore;
 using NUnit.Framework;
 
 namespace FieldAgent.DAL.Tests
@@ -34,6 +35,7 @@ namespace FieldAgent.DAL.Tests
             ConfigProvider provider = new ConfigProvider();
             dbf = new DBFactory(provider.Config, FactoryMode.TEST);
             db = new AgencyRepository(dbf);
+            //dbf.GetDbContext().Database.ExecuteSqlRaw("SetKnownGoodState");
         }
 
         [Test]

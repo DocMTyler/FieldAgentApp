@@ -8,6 +8,7 @@ using NUnit.Framework;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace FieldAgent.DAL.Tests
 {
@@ -39,6 +40,7 @@ namespace FieldAgent.DAL.Tests
             ConfigProvider provider = new ConfigProvider();
             dbf = new DBFactory(provider.Config, FactoryMode.TEST);
             db = new AgentRepository(dbf);
+            //dbf.GetDbContext().Database.ExecuteSqlRaw("SetKnownGoodState");
         }
 
         [Test]

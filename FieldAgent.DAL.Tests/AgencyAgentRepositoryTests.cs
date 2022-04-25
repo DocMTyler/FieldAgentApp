@@ -1,5 +1,6 @@
 ﻿using FieldAgent.Core.Entities;
 using FieldAgent.DAL.Repositories;
+using Microsoft.EntityFrameworkCore;
 using NUnit.Framework;
 using System;
 
@@ -38,6 +39,7 @@ namespace FieldAgent.DAL.Tests
             ConfigProvider provider = new ConfigProvider();
             dbf = new DBFactory(provider.Config, FactoryMode.TEST);
             db = new AgencyAgentRepository(dbf);
+            //dbf.GetDbContext().Database.ExecuteSqlRaw("SetKnownGoodState");
         }
 
         [Test]
@@ -61,7 +63,7 @@ namespace FieldAgent.DAL.Tests
         [Test]
         public void DeleteDeletes()
         {
-            Assert.IsTrue(db.Delete(fFAAUpdate.AgencyID, fFAAUpdate.AgentID).Success);
+            Assert.IsTrue(db.Delete(1, 1).Success);
         }
 
         [Test]
