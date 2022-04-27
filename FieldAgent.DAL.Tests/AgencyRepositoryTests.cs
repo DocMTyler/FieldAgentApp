@@ -17,7 +17,7 @@ namespace FieldAgent.DAL.Tests
 
         Agency FFAUpdate = new Agency
         {
-            AgencyID = 13,
+            AgencyID = 1,
             ShortName = "UFFA",
             LongName = "Updated Fake Fucking Agency"
         };
@@ -35,7 +35,7 @@ namespace FieldAgent.DAL.Tests
             ConfigProvider provider = new ConfigProvider();
             dbf = new DBFactory(provider.Config, FactoryMode.TEST);
             db = new AgencyRepository(dbf);
-            //dbf.GetDbContext().Database.ExecuteSqlRaw("SetKnownGoodState");
+            dbf.GetDbContext().Database.ExecuteSqlRaw("SetKnownGoodState");
         }
 
         [Test]
@@ -47,7 +47,7 @@ namespace FieldAgent.DAL.Tests
         [Test]
         public void TestGetAll()
         {
-            Assert.AreEqual(12, db.GetAll().Data.Count);
+            Assert.AreEqual(5, db.GetAll().Data.Count);
         }
 
         [Test]
@@ -65,7 +65,7 @@ namespace FieldAgent.DAL.Tests
         [Test]
         public void DeleteDeletes()
         {
-            Assert.IsTrue(db.Delete(FFAUpdate.AgencyID).Success);
+            Assert.IsTrue(db.Delete(1).Success);
         }
     }
 }

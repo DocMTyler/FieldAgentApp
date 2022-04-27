@@ -29,7 +29,7 @@ namespace FieldAgent.DAL
                     {
                         db.AgencyAgent.Remove(agencyAgent);
                         db.SaveChanges();
-                        response.Message = "Got";
+                        response.Message = "Deleted";
                         response.Success = true;
                     }catch(Exception e)
                     {

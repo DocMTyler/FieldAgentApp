@@ -17,7 +17,7 @@ namespace FieldAgent.DAL.Tests
             ConfigProvider provider = new ConfigProvider();
             dbf = new DBFactory(provider.Config, FactoryMode.TEST);
             db = new LocationRepository(dbf);
-            //dbf.GetDbContext().Database.ExecuteSqlRaw("SetKnownGoodState");
+            dbf.GetDbContext().Database.ExecuteSqlRaw("SetKnownGoodState");
         }
 
         Location place = new Location()
@@ -34,7 +34,7 @@ namespace FieldAgent.DAL.Tests
 
         Location updatePlace = new Location()
         {
-            LocationID = 8,
+            LocationID = 5,
             AgencyID = 2,
             LocationName = "Some shit-de-France",
             Street1 = "4659 Sunbrook Avenue",
@@ -47,13 +47,13 @@ namespace FieldAgent.DAL.Tests
         [Test]
         public void GetGets()
         {
-            Assert.AreEqual("ÃŽle-de-France", db.Get(8).Data.LocationName);
+            Assert.AreEqual("Gaoua", db.Get(1).Data.LocationName);
         }
 
         [Test]
         public void GetByAgencyGetsByAgency()
         {
-            Assert.IsTrue(db.GetByAgency(8).Success);
+            Assert.IsTrue(db.GetByAgency(4).Success);
         }
 
         [Test]
@@ -71,7 +71,7 @@ namespace FieldAgent.DAL.Tests
         [Test]
         public void DeleteDeletes()
         {
-            Assert.IsTrue(db.Delete(31).Success);
+            Assert.IsTrue(db.Delete(3).Success);
         }
     }
 }

@@ -17,7 +17,7 @@ namespace FieldAgent.DAL.Tests
             ConfigProvider provider = new ConfigProvider();
             dbf = new DBFactory(provider.Config, FactoryMode.TEST);
             db = new SecurityClearanceRepository(dbf);
-            //dbf.GetDbContext().Database.ExecuteSqlRaw("SetKnownGoodState");
+            dbf.GetDbContext().Database.ExecuteSqlRaw("SetKnownGoodState");
         }
 
         [Test]
@@ -29,7 +29,7 @@ namespace FieldAgent.DAL.Tests
         [Test]
         public void GetAllGetsAll()
         {
-            Assert.AreEqual(10, db.GetAll().Data.Count);
+            Assert.AreEqual(5, db.GetAll().Data.Count);
         }
     }
 }

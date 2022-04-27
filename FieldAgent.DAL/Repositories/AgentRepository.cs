@@ -27,6 +27,24 @@ namespace FieldAgent.DAL.Repositories
                 {
                     try
                     {
+                        var agencyAgents = db.AgencyAgent.Where(aa => aa.AgentID == agentId);
+                        foreach(var aa in agencyAgents)
+                        {
+                            db.AgencyAgent.Remove(aa);
+                        }
+
+                        var aliases = db.Alias.Where(al => al.AgentID == agentId);
+                        foreach(var al in aliases)
+                        {
+                            db.Alias.Remove(al);
+                        }
+
+                        var missionAgents = db.MissionAgent.Where(ma => ma.AgentId == agentId);
+                        foreach(var ma in missionAgents)
+                        {
+                            db.MissionAgent.Remove(ma);
+                        }
+                        
                         db.Agent.Remove(agent);
                         db.SaveChanges();
                         response.Message = "Deleted";

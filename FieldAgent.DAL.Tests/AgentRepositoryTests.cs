@@ -19,15 +19,15 @@ namespace FieldAgent.DAL.Tests
 
         Agent ffa = new Agent()
         {
-            FirstName = "Trenton",
-            LastName = "Pattle",
-            DateOfBirth = DateTime.Parse("1/1/2000"),
-            Height = 0.83m
+            FirstName = "Vinson",
+            LastName = "Leechman",
+            DateOfBirth = DateTime.Parse("3/27/2007"),
+            Height = 5.85m
         };
 
         Agent ffaUpdate = new Agent()
         {
-            AgentID = 10,
+            AgentID = 5,
             FirstName = "Trent",
             LastName = "Patty",
             DateOfBirth = DateTime.Parse("1/11/2000"),
@@ -40,13 +40,13 @@ namespace FieldAgent.DAL.Tests
             ConfigProvider provider = new ConfigProvider();
             dbf = new DBFactory(provider.Config, FactoryMode.TEST);
             db = new AgentRepository(dbf);
-            //dbf.GetDbContext().Database.ExecuteSqlRaw("SetKnownGoodState");
+            dbf.GetDbContext().Database.ExecuteSqlRaw("SetKnownGoodState");
         }
 
         [Test]
         public void DeleteDeletes()
         {
-            Assert.IsTrue(db.Delete(12).Success);
+            Assert.IsTrue(db.Delete(1).Success);
         }
 
         [Test]

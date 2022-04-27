@@ -13,7 +13,7 @@ namespace FieldAgent.DAL.Tests
 
         Mission thing = new Mission()
         {
-            AgencyID = 6,
+            AgencyID = 5,
             CodeName = "o=",
             StartDate = DateTime.Parse("1/15/2021"),
             ProjectedEndDate = DateTime.Parse("6/22/2019"),
@@ -22,10 +22,10 @@ namespace FieldAgent.DAL.Tests
         Mission updatedThing = new Mission()
         {
             MissionID = 1,
-            AgencyID = 6,
+            AgencyID = 3,
             CodeName = "fuck off",
-            StartDate = DateTime.Parse("1/15/2021"),
-            ProjectedEndDate = DateTime.Parse("6/22/2019"),
+            StartDate = DateTime.Parse("1/15/2019"),
+            ProjectedEndDate = DateTime.Parse("6/22/2021"),
         };
 
         [SetUp]
@@ -34,7 +34,7 @@ namespace FieldAgent.DAL.Tests
             ConfigProvider provider = new ConfigProvider();
             dbf = new DBFactory(provider.Config, FactoryMode.TEST);
             db = new MissionRepository(dbf);
-            //dbf.GetDbContext().Database.ExecuteSqlRaw("SetKnownGoodState");
+            dbf.GetDbContext().Database.ExecuteSqlRaw("SetKnownGoodState");
         }
 
         [Test]
@@ -64,7 +64,7 @@ namespace FieldAgent.DAL.Tests
         [Test]
         public void DeleteDeletes()
         {
-            Assert.IsTrue(db.Delete(11).Success);
+            Assert.IsTrue(db.Delete(1).Success);
         }
     }
 }

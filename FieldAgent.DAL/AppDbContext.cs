@@ -30,8 +30,11 @@ namespace FieldAgent.DAL
         {
             builder.Entity<AgencyAgent>()
                 .HasKey(a => new { a.AgencyID, a.AgentID });
-            builder.Entity<MissionAgent>()
-                .HasKey(ma => new { ma.MissionId, ma.AgentId });
+            builder.Entity<MissionAgent>(builder =>
+            {
+                builder.HasKey(ma => new { ma.MissionId, ma.AgentId });
+                //builder.ToTable("MissionAgent");
+            });
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
