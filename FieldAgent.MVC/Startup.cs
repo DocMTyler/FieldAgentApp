@@ -23,9 +23,9 @@ namespace FieldAgent.MVC
             services.AddTransient<IAgencyRepository, AgencyRepository>();
             services.AddTransient<IAgencyAgentRepository, AgencyAgentRepository>();
             services.AddTransient<IAgentRepository, AgentRepository>();
-            //services.AddTransient<IAliasRepository, AliasRepository>();
+            services.AddTransient<IAliasRepository, AliasRepository>();
             //services.AddTransient<ILocationRepository, LocationRepository>();
-            //services.AddTransient<IMissionRepository, MissionRepository>();
+            services.AddTransient<IMissionRepository, MissionRepository>();
             //services.AddTransient<ISecurityClearanceRepository, SecurityClearanceRepository>();
             //services.AddTransient<IReportsRepository, ReportsRepository>();
         }

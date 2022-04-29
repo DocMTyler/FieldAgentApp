@@ -10,17 +10,17 @@ namespace FieldAgent.DAL.Repositories
 {
     public class MissionRepository : IMissionRepository
     {
-        DBFactory DbFac;
+        /*DBFactory DbFac;
 
         public MissionRepository(DBFactory dbFac)
         {
             DbFac = dbFac;
-        }
+        }*/
         
         public Response Delete(int missionId)
         {
             Response response = new Response();
-            using (var db = DbFac.GetDbContext())
+            using (var db = new AppDbContext())
             {
                 var mission = db.Mission
                     .Single(aa => aa.MissionID == missionId);
@@ -49,7 +49,7 @@ namespace FieldAgent.DAL.Repositories
         public Response<Mission> Get(int missionId)
         {
             Response<Mission> response = new Response<Mission>();
-            using(var db = DbFac.GetDbContext())
+            using(var db = new AppDbContext())
             {
                 response.Data = db.Mission
                     .Single(l => l.MissionID == missionId);
@@ -70,7 +70,7 @@ namespace FieldAgent.DAL.Repositories
         public Response<List<Mission>> GetByAgency(int agencyId)
         {
             Response<List<Mission>> response = new Response<List<Mission>>();
-            using (var db = DbFac.GetDbContext())
+            using (var db = new AppDbContext())
             {
                 response.Data = db.Mission.Where(a => a.AgencyID == agencyId).ToList();
                 if (response.Data != null)
@@ -90,7 +90,7 @@ namespace FieldAgent.DAL.Repositories
         public Response<List<Mission>> GetByAgent(int agentId)
         {
             Response<List<Mission>> response = new Response<List<Mission>>();
-            using (var db = DbFac.GetDbContext())
+            using (var db = new AppDbContext())
             {
                 try
                 {
@@ -125,7 +125,7 @@ namespace FieldAgent.DAL.Repositories
         public Response<Mission> Insert(Mission mission)
         {
             Response<Mission> response = new Response<Mission>();
-            using (var db = DbFac.GetDbContext())
+            using (var db = new AppDbContext())
             {
                 try
                 {
@@ -155,7 +155,7 @@ namespace FieldAgent.DAL.Repositories
         public Response Update(Mission mission)
         {
             Response response = new();
-            using (var db = DbFac.GetDbContext())
+            using (var db = new AppDbContext())
             {
                 var foundMission = db.Mission.Single(aa => aa.MissionID == mission.MissionID);
                 if (foundMission != null)
