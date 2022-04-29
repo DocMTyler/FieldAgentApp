@@ -1,6 +1,7 @@
 ﻿using FieldAgent.Core.Entities;
 using FieldAgent.Core.Interfaces.DAL;
 using FieldAgent.MVC.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 
@@ -17,7 +18,7 @@ namespace FieldAgent.MVC.Controllers
             agencyRepo = _agencyRepo;
         }
 
-        [HttpGet]
+        [HttpGet/*, Authorize*/]
         public IActionResult GetAgencies()
         {
             var result = agencyRepo.GetAll();

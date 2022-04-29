@@ -33,7 +33,7 @@ namespace FieldAgent.DAL.Tests
         {
             ConfigProvider provider = new ConfigProvider();
             dbf = new DBFactory(provider.Config, FactoryMode.TEST);
-            db = new MissionRepository(dbf);
+            db = new MissionRepository(/*dbf*/);
             dbf.GetDbContext().Database.ExecuteSqlRaw("SetKnownGoodState");
         }
 

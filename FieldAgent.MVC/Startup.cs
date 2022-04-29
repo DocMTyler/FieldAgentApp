@@ -10,6 +10,10 @@ using System.Threading.Tasks;
 using FieldAgent.Core.Interfaces.DAL;
 using FieldAgent.DAL.Repositories;
 using FieldAgent.DAL;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using Microsoft.AspNetCore.Mvc;
 
 namespace FieldAgent.MVC
 {
@@ -19,6 +23,23 @@ namespace FieldAgent.MVC
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+              .AddJwtBearer(options =>
+              {
+                  options.TokenValidationParameters = new TokenValidationParameters
+                  {
+                      ValidateIssuer = true,
+                      ValidateAudience = true,
+                      ValidateLifetime = true,
+                      ValidateIssuerSigningKey = true,
+
+                      ValidIssuer = "http://localhost:2000",
+                      ValidAudience = "http://localhost:2000",
+                      IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("KeyForSignInSecret@1234"))
+                  };
+                  services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+              });
+
             services.AddControllers();
             services.AddTransient<IAgencyRepository, AgencyRepository>();
             services.AddTransient<IAgencyAgentRepository, AgencyAgentRepository>();
@@ -40,6 +61,10 @@ namespace FieldAgent.MVC
 
             app.UseStaticFiles();
             app.UseRouting();
+
+            app.UseAuthentication();
+
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
