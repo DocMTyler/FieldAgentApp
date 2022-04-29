@@ -10,17 +10,17 @@ namespace FieldAgent.DAL.Repositories
 {
     public class AgentRepository : IAgentRepository
     {
-        private DBFactory DbFac;
+        /*private DBFactory DbFac;
 
         public AgentRepository(DBFactory dbFac)
         {
             DbFac = dbFac;
         }
-
+*/
         public Response Delete(int agentId)
         {
             Response response = new();
-            using (var db = DbFac.GetDbContext())
+            using (var db = new AppDbContext())
             {
                 var agent = db.Agent.Single(a => a.AgentID == agentId);
                 if (agent != null)
@@ -64,7 +64,7 @@ namespace FieldAgent.DAL.Repositories
         public Response<Agent> Get(int agentId)
         {
             Response<Agent> response = new Response<Agent>();
-            using (var db = DbFac.GetDbContext())
+            using (var db = new AppDbContext())
             {
                 response.Data = db.Agent.Find(agentId);
                 if (response.Data != null)
@@ -84,7 +84,7 @@ namespace FieldAgent.DAL.Repositories
         public Response<List<Mission>> GetMissions(int agentId)
         {
             Response<List<Mission>> response = new Response<List<Mission>>();
-            using(var db = DbFac.GetDbContext())
+            using(var db = new AppDbContext())
             {
                 var mission = db.Mission
                      .Include(m => m.MissionAgent)
@@ -111,7 +111,7 @@ namespace FieldAgent.DAL.Repositories
         public Response<Agent> Insert(Agent agent)
         {
             Response<Agent> response = new Response<Agent>();
-            using (var db = DbFac.GetDbContext())
+            using (var db = new AppDbContext())
             {
                 if (agent != null)
                 {
@@ -137,7 +137,7 @@ namespace FieldAgent.DAL.Repositories
         public Response Update(Agent agent)
         {
             Response response = new();
-            using (var db = DbFac.GetDbContext())
+            using (var db = new AppDbContext())
             {
                 var foundAgent = db.Agent.Find(agent.AgentID);
                 if (foundAgent != null)

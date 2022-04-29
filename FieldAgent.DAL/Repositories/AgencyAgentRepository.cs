@@ -9,17 +9,17 @@ namespace FieldAgent.DAL
 {
     public class AgencyAgentRepository : IAgencyAgentRepository
     {
-        DBFactory DbFac;
+        /*DBFactory DbFac;
 
         public AgencyAgentRepository(DBFactory dbFac) 
         {
             DbFac = dbFac;
-        }
+        }*/
         
         public Response Delete(int agencyid, int agentid)
         {
             Response<AgencyAgent> response = new Response<AgencyAgent>();
-            using (var db = DbFac.GetDbContext())
+            using (var db = new AppDbContext())
             {
                 var agencyAgent = db.AgencyAgent
                     .Single(aa => aa.AgencyID == agencyid && aa.AgentID == agentid);
@@ -49,7 +49,7 @@ namespace FieldAgent.DAL
         public Response<AgencyAgent> Get(int agencyid, int agentid)
         {
             Response<AgencyAgent> response = new Response<AgencyAgent>();
-            using (var db = DbFac.GetDbContext())
+            using (var db = new AppDbContext())
             {
                 response.Data = db.AgencyAgent
                     .Single(aa => aa.AgencyID == agencyid && aa.AgentID == agentid);
@@ -70,7 +70,7 @@ namespace FieldAgent.DAL
         public Response<List<AgencyAgent>> GetByAgency(int agencyId)
         {
             Response<List<AgencyAgent>> response = new Response<List<AgencyAgent>>();
-            using(var db = DbFac.GetDbContext())
+            using(var db = new AppDbContext())
             {
                 response.Data = db.AgencyAgent.Where(a => a.AgencyID == agencyId).ToList();
                 if(response.Data != null)
@@ -90,7 +90,7 @@ namespace FieldAgent.DAL
         public Response<List<AgencyAgent>> GetByAgent(int agentId)
         {
             Response<List<AgencyAgent>> response = new Response<List<AgencyAgent>>();
-            using(var db = DbFac.GetDbContext())
+            using(var db = new AppDbContext())
             {
                 response.Data = db.AgencyAgent.Where(a => a.AgentID == agentId).ToList();
                 if(response.Data != null)
@@ -110,7 +110,7 @@ namespace FieldAgent.DAL
         public Response<AgencyAgent> Insert(AgencyAgent agencyAgent)
         {
             Response<AgencyAgent> response = new Response<AgencyAgent>();
-            using (var db = DbFac.GetDbContext())
+            using (var db = new AppDbContext())
             {
                 try
                 {
@@ -140,7 +140,7 @@ namespace FieldAgent.DAL
         public Response Update(AgencyAgent agencyAgent)
         {
             Response response = new();
-            using (var db = DbFac.GetDbContext())
+            using (var db = new AppDbContext())
             {
                 var foundAgencyAgent = db.AgencyAgent.Single(aa => aa.BadgeID == agencyAgent.BadgeID);
                 if (foundAgencyAgent != null)
@@ -149,6 +149,7 @@ namespace FieldAgent.DAL
                     {
                         foundAgencyAgent.ActivationDate = agencyAgent.ActivationDate;
                         foundAgencyAgent.DeactivationDate = agencyAgent.DeactivationDate;
+                        foundAgencyAgent.IsActive = agencyAgent.IsActive;
                         db.AgencyAgent.Update(foundAgencyAgent);
                         db.SaveChanges();
                         response.Message = "Updated";

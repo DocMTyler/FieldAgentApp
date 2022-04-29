@@ -9,17 +9,17 @@ namespace FieldAgent.DAL.Repositories
 {
     public class AgencyRepository : IAgencyRepository
     {
-        private DBFactory DbFac;
+        /*private DBFactory DbFac;
 
         public AgencyRepository(DBFactory dbFac)
         {
             DbFac = dbFac;
-        }
+        }*/
 
         public Response Delete(int agencyId)
         {
             Response response = new();
-            using(var db = DbFac.GetDbContext())
+            using(var db = new AppDbContext())
             {
                 var agency = db.Agency.Single(a => a.AgencyID == agencyId);
                 if(agency != null)
@@ -75,7 +75,7 @@ namespace FieldAgent.DAL.Repositories
         public Response<Agency> Get(int agencyId)
         {
             Response<Agency> response = new Response<Agency>();
-            using(var db = DbFac.GetDbContext())
+            using(var db = new AppDbContext())
             {
                 response.Data = db.Agency.Find(agencyId);
                 if(response.Data != null)
@@ -95,7 +95,7 @@ namespace FieldAgent.DAL.Repositories
         public Response<List<Agency>> GetAll()
         {
             Response<List<Agency>> response = new Response<List<Agency>>();
-            using (var db = DbFac.GetDbContext())
+            using (var db = new AppDbContext())
             {
                 response.Data = db.Agency.ToList();
                 if (response.Data != null)
@@ -115,7 +115,7 @@ namespace FieldAgent.DAL.Repositories
         public Response<Agency> Insert(Agency agency)
         {
             Response<Agency> response = new Response<Agency>();
-            using(var db = DbFac.GetDbContext())
+            using(var db = new AppDbContext())
             {
                 if(agency != null)
                 {
@@ -141,7 +141,7 @@ namespace FieldAgent.DAL.Repositories
         public Response Update(Agency agency)
         {
             Response response = new();
-            using(var db = DbFac.GetDbContext())
+            using(var db = new AppDbContext())
             {
                 var foundAgency = db.Agency.Find(agency.AgencyID);
                 if(foundAgency != null)

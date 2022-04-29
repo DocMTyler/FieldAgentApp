@@ -39,7 +39,8 @@ namespace FieldAgent.DAL
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.LogTo(message => Debug.WriteLine(message), LogLevel.Information);
+            optionsBuilder.UseSqlServer(SettingsManager.GetConnectionString());
+            //optionsBuilder.LogTo(message => Debug.WriteLine(message), LogLevel.Information);
         }
     }
 }
