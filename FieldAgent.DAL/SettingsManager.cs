@@ -19,7 +19,8 @@ namespace FieldAgent.DAL
                 var builder = new ConfigurationBuilder();
 
                 builder.SetBasePath(Directory.GetCurrentDirectory());
-                builder.AddJsonFile("appsettings.json", false, true);
+                //builder.AddJsonFile("appsettings.json", false, true);
+                builder.AddUserSecrets<AppDbContext>();
                 
                 var config = builder.Build();
 
