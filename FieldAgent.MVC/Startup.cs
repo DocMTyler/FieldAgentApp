@@ -19,8 +19,8 @@ namespace FieldAgent.MVC
 {
     public class Startup
     {
-        // This method gets called by the runtime. Use this method to add services to the container.
-        // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
+        private const string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -39,6 +39,17 @@ namespace FieldAgent.MVC
                   };
                   services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
               });
+            
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: MyAllowSpecificOrigins,
+                    policy =>
+                    {
+                        policy.AllowAnyHeader();
+                        policy.WithOrigins("*", "http://localhost:3002");
+                        policy.AllowAnyMethod();
+                    });
+            });
 
             services.AddControllers();
             services.AddTransient<IAgencyRepository, AgencyRepository>();
@@ -61,6 +72,8 @@ namespace FieldAgent.MVC
 
             app.UseStaticFiles();
             app.UseRouting();
+            
+            app.UseCors(MyAllowSpecificOrigins);
 
             app.UseAuthentication();
 
